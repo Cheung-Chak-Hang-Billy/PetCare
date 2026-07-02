@@ -7,6 +7,8 @@ import {
   Modal,
   TextInput,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -114,7 +116,7 @@ export default function Dashboard() {
 
   return (
     <View
-      style={{ flex: 1, backgroundColor: "#FFFFFF", paddingTop: insets.top }}
+      style={{ flex: 1, backgroundColor: "#F4F7FF", paddingTop: insets.top }}
     >
       <ScrollView
         style={{ flex: 1 }}
@@ -122,19 +124,29 @@ export default function Dashboard() {
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={{ paddingHorizontal: 24, paddingVertical: 20 }}>
-          <Text style={{ fontSize: 30, fontWeight: "600", color: "#111827" }}>
-            Pet Care
+        <View
+          style={{
+            paddingHorizontal: 24,
+            paddingTop: 24,
+            paddingBottom: 28,
+            backgroundColor: "#2563EB",
+            borderBottomLeftRadius: 28,
+            borderBottomRightRadius: 28,
+            marginBottom: 4,
+          }}
+        >
+          <Text style={{ fontSize: 28, fontWeight: "700", color: "#FFFFFF" }}>
+            🐾 Pet Care
           </Text>
-          <Text style={{ fontSize: 14, color: "#6B7280", marginTop: 4 }}>
+          <Text style={{ fontSize: 14, color: "#BFDBFE", marginTop: 4 }}>
             Manage your pet's health and happiness.
           </Text>
         </View>
 
         {/* Pets Selector — horizontal scroll, selectable */}
-        <View style={{ marginBottom: 32 }}>
-          <View style={{ paddingHorizontal: 24, marginBottom: 16 }}>
-            <Text style={{ fontSize: 18, fontWeight: "600", color: "#111827" }}>
+        <View style={{ marginBottom: 28, marginTop: 20 }}>
+          <View style={{ paddingHorizontal: 24, marginBottom: 14 }}>
+            <Text style={{ fontSize: 17, fontWeight: "600", color: "#111827" }}>
               Your Pets
             </Text>
           </View>
@@ -159,14 +171,19 @@ export default function Dashboard() {
                     onPress={() => setSelectedPetId(pet.id)}
                     style={{
                       width: 240,
-                      backgroundColor: isSelected ? "#EFF6FF" : "#FFFFFF",
-                      borderRadius: 12,
+                      backgroundColor: isSelected ? "#EEF4FF" : "#FFFFFF",
+                      borderRadius: 16,
                       borderWidth: isSelected ? 2 : 1,
                       borderColor: isSelected ? "#2563EB" : "#E5E7EB",
                       padding: 16,
                       marginRight: 16,
                       flexDirection: "row",
                       alignItems: "center",
+                      shadowColor: "#2563EB",
+                      shadowOpacity: isSelected ? 0.1 : 0,
+                      shadowRadius: 8,
+                      shadowOffset: { width: 0, height: 2 },
+                      elevation: isSelected ? 2 : 0,
                     }}
                   >
                     <Image
@@ -198,9 +215,9 @@ export default function Dashboard() {
                       >
                         <View
                           style={{
-                            backgroundColor: "#F9FAFB",
+                            backgroundColor: isSelected ? "#DBEAFE" : "#F9FAFB",
                             borderWidth: 1,
-                            borderColor: "#E5E7EB",
+                            borderColor: isSelected ? "#BFDBFE" : "#E5E7EB",
                             borderRadius: 999,
                             paddingHorizontal: 8,
                             paddingVertical: 2,
@@ -209,7 +226,7 @@ export default function Dashboard() {
                           <Text
                             style={{
                               fontSize: 10,
-                              color: "#6B7280",
+                              color: isSelected ? "#1D4ED8" : "#6B7280",
                               fontWeight: "500",
                             }}
                           >
@@ -218,9 +235,9 @@ export default function Dashboard() {
                         </View>
                         <View
                           style={{
-                            backgroundColor: "#F9FAFB",
+                            backgroundColor: isSelected ? "#DBEAFE" : "#F9FAFB",
                             borderWidth: 1,
-                            borderColor: "#E5E7EB",
+                            borderColor: isSelected ? "#BFDBFE" : "#E5E7EB",
                             borderRadius: 999,
                             paddingHorizontal: 8,
                             paddingVertical: 2,
@@ -229,7 +246,7 @@ export default function Dashboard() {
                           <Text
                             style={{
                               fontSize: 10,
-                              color: "#6B7280",
+                              color: isSelected ? "#1D4ED8" : "#6B7280",
                               fontWeight: "500",
                             }}
                           >
@@ -264,24 +281,24 @@ export default function Dashboard() {
 
         {/* Vital Signs Section */}
         {selectedPet && (
-          <View style={{ paddingHorizontal: 24, marginBottom: 32 }}>
+          <View style={{ paddingHorizontal: 24, marginBottom: 28 }}>
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
-                marginBottom: 16,
+                marginBottom: 14,
               }}
             >
               <Text
-                style={{ fontSize: 18, fontWeight: "600", color: "#111827" }}
+                style={{ fontSize: 17, fontWeight: "600", color: "#111827" }}
               >
                 {selectedPet.name}'s Vitals
               </Text>
               <TouchableOpacity
                 onPress={() => setShowVitalsModal(true)}
                 style={{
-                  backgroundColor: "#EFF6FF",
+                  backgroundColor: "#2563EB",
                   paddingHorizontal: 12,
                   paddingVertical: 6,
                   borderRadius: 999,
@@ -289,12 +306,12 @@ export default function Dashboard() {
                   alignItems: "center",
                 }}
               >
-                <Plus size={14} color="#2563EB" />
+                <Plus size={14} color="#FFFFFF" />
                 <Text
                   style={{
                     fontSize: 13,
                     fontWeight: "500",
-                    color: "#2563EB",
+                    color: "#FFFFFF",
                     marginLeft: 4,
                   }}
                 >
@@ -306,10 +323,13 @@ export default function Dashboard() {
             <View
               style={{
                 backgroundColor: "#FFFFFF",
-                borderRadius: 12,
-                borderWidth: 1,
-                borderColor: "#E5E7EB",
+                borderRadius: 16,
                 padding: 20,
+                shadowColor: "#000",
+                shadowOpacity: 0.05,
+                shadowRadius: 8,
+                shadowOffset: { width: 0, height: 2 },
+                elevation: 2,
               }}
             >
               {latestVitals ? (
@@ -562,10 +582,21 @@ export default function Dashboard() {
               onPress={() => router.push(`/(tabs)/diary/${recentDiary[0].id}`)}
               style={{
                 backgroundColor: "#FFFFFF",
-                borderRadius: 12,
-                borderWidth: 1,
-                borderColor: "#E5E7EB",
+                borderRadius: 16,
+                borderLeftWidth: 4,
+                borderLeftColor: "#F59E0B",
+                borderTopWidth: 1,
+                borderRightWidth: 1,
+                borderBottomWidth: 1,
+                borderTopColor: "#FEF3C7",
+                borderRightColor: "#FEF3C7",
+                borderBottomColor: "#FEF3C7",
                 padding: 16,
+                shadowColor: "#F59E0B",
+                shadowOpacity: 0.08,
+                shadowRadius: 6,
+                shadowOffset: { width: 0, height: 2 },
+                elevation: 2,
               }}
             >
               <View
@@ -670,139 +701,150 @@ export default function Dashboard() {
         presentationStyle="pageSheet"
         onRequestClose={() => setShowVitalsModal(false)}
       >
-        <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: 20,
-              borderBottomWidth: 1,
-              borderBottomColor: "#E5E7EB",
-            }}
-          >
-            <Text style={{ fontSize: 18, fontWeight: "600", color: "#111827" }}>
-              Log Vitals for {selectedPet?.name}
-            </Text>
-            <TouchableOpacity onPress={() => setShowVitalsModal(false)}>
-              <X size={24} color="#111827" />
-            </TouchableOpacity>
-          </View>
-          <ScrollView
-            style={{ flex: 1 }}
-            contentContainerStyle={{ padding: 24 }}
-          >
-            {[
-              {
-                label: "Heart Rate",
-                unit: "bpm",
-                value: heartRate,
-                setter: setHeartRate,
-                icon: "❤️",
-                keyboardType: "numeric",
-              },
-              {
-                label: "Hours of Sleep",
-                unit: "hrs",
-                value: hoursOfSleep,
-                setter: setHoursOfSleep,
-                icon: "🌙",
-                keyboardType: "decimal-pad",
-              },
-              {
-                label: "Temperature",
-                unit: "°C",
-                value: temperature,
-                setter: setTemperature,
-                icon: "🌡️",
-                keyboardType: "decimal-pad",
-              },
-              {
-                label: "Respiratory Rate",
-                unit: "br/min",
-                value: respiratoryRate,
-                setter: setRespiratoryRate,
-                icon: "💨",
-                keyboardType: "numeric",
-              },
-            ].map(({ label, unit, value, setter, icon, keyboardType }) => (
-              <View key={label} style={{ marginBottom: 20 }}>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: "500",
-                    color: "#374151",
-                    marginBottom: 8,
-                  }}
-                >
-                  {icon} {label}
-                </Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    borderWidth: 1,
-                    borderColor: "#E5E7EB",
-                    borderRadius: 10,
-                    overflow: "hidden",
-                  }}
-                >
-                  <TextInput
-                    style={{
-                      flex: 1,
-                      padding: 14,
-                      fontSize: 16,
-                      color: "#111827",
-                    }}
-                    placeholder={`e.g. ${label === "Heart Rate" ? "80" : label === "Hours of Sleep" ? "8" : label === "Temperature" ? "38.5" : "20"}`}
-                    placeholderTextColor="#9CA3AF"
-                    keyboardType={keyboardType}
-                    value={value}
-                    onChangeText={setter}
-                  />
-                  <View
-                    style={{
-                      paddingHorizontal: 14,
-                      backgroundColor: "#F9FAFB",
-                      height: "100%",
-                      justifyContent: "center",
-                      borderLeftWidth: 1,
-                      borderLeftColor: "#E5E7EB",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 13,
-                        color: "#6B7280",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {unit}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            ))}
-            <TouchableOpacity
-              onPress={handleSaveVitals}
-              disabled={vitalsMutation.isPending}
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
+            <View
               style={{
-                backgroundColor: "#2563EB",
-                paddingVertical: 16,
-                borderRadius: 999,
+                flexDirection: "row",
+                justifyContent: "space-between",
                 alignItems: "center",
-                marginTop: 8,
-                opacity: vitalsMutation.isPending ? 0.6 : 1,
+                padding: 20,
+                borderBottomWidth: 1,
+                borderBottomColor: "#E5E7EB",
               }}
             >
               <Text
-                style={{ fontSize: 16, fontWeight: "600", color: "#FFFFFF" }}
+                style={{ fontSize: 18, fontWeight: "600", color: "#111827" }}
               >
-                {vitalsMutation.isPending ? "Saving..." : "Save Vitals"}
+                Log Vitals for {selectedPet?.name}
               </Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
+              <TouchableOpacity onPress={() => setShowVitalsModal(false)}>
+                <X size={24} color="#111827" />
+              </TouchableOpacity>
+            </View>
+            <ScrollView
+              style={{ flex: 1 }}
+              contentContainerStyle={{ padding: 24, paddingBottom: 40 }}
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+            >
+              {[
+                {
+                  label: "Heart Rate",
+                  unit: "bpm",
+                  value: heartRate,
+                  setter: setHeartRate,
+                  icon: "❤️",
+                  keyboardType: "numeric",
+                },
+                {
+                  label: "Hours of Sleep",
+                  unit: "hrs",
+                  value: hoursOfSleep,
+                  setter: setHoursOfSleep,
+                  icon: "🌙",
+                  keyboardType: "decimal-pad",
+                },
+                {
+                  label: "Temperature",
+                  unit: "°C",
+                  value: temperature,
+                  setter: setTemperature,
+                  icon: "🌡️",
+                  keyboardType: "decimal-pad",
+                },
+                {
+                  label: "Respiratory Rate",
+                  unit: "br/min",
+                  value: respiratoryRate,
+                  setter: setRespiratoryRate,
+                  icon: "💨",
+                  keyboardType: "numeric",
+                },
+              ].map(({ label, unit, value, setter, icon, keyboardType }) => (
+                <View key={label} style={{ marginBottom: 16 }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "500",
+                      color: "#374151",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {icon} {label}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      borderWidth: 1,
+                      borderColor: "#E5E7EB",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <TextInput
+                      style={{
+                        flex: 1,
+                        paddingHorizontal: 12,
+                        paddingVertical: Platform.OS === "android" ? 8 : 12,
+                        fontSize: 15,
+                        color: "#111827",
+                      }}
+                      placeholder={`e.g. ${label === "Heart Rate" ? "80" : label === "Hours of Sleep" ? "8" : label === "Temperature" ? "38.5" : "20"}`}
+                      placeholderTextColor="#9CA3AF"
+                      keyboardType={keyboardType}
+                      value={value}
+                      onChangeText={setter}
+                      returnKeyType="next"
+                    />
+                    <View
+                      style={{
+                        paddingHorizontal: 12,
+                        paddingVertical: Platform.OS === "android" ? 8 : 12,
+                        backgroundColor: "#F9FAFB",
+                        justifyContent: "center",
+                        borderLeftWidth: 1,
+                        borderLeftColor: "#E5E7EB",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 13,
+                          color: "#6B7280",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {unit}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              ))}
+              <TouchableOpacity
+                onPress={handleSaveVitals}
+                disabled={vitalsMutation.isPending}
+                style={{
+                  backgroundColor: "#2563EB",
+                  paddingVertical: 14,
+                  borderRadius: 999,
+                  alignItems: "center",
+                  marginTop: 8,
+                  opacity: vitalsMutation.isPending ? 0.6 : 1,
+                }}
+              >
+                <Text
+                  style={{ fontSize: 16, fontWeight: "600", color: "#FFFFFF" }}
+                >
+                  {vitalsMutation.isPending ? "Saving..." : "Save Vitals"}
+                </Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   );

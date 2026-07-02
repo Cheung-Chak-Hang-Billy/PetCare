@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Settings, Plus, Camera, Trash2, X } from "lucide-react-native";
+import { Settings, Plus, Camera, Trash2, X, User } from "lucide-react-native";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import useUpload from "@/utils/useUpload";
@@ -119,33 +119,42 @@ export default function Profile() {
 
   return (
     <View
-      style={{ flex: 1, backgroundColor: "#FFFFFF", paddingTop: insets.top }}
+      style={{ flex: 1, backgroundColor: "#F4F7FF", paddingTop: insets.top }}
     >
       {/* Header */}
       <View
         style={{
           paddingHorizontal: 24,
-          paddingVertical: 20,
-          borderBottomWidth: 1,
-          borderBottomColor: "#E5E7EB",
+          paddingTop: 24,
+          paddingBottom: 28,
+          backgroundColor: "#2563EB",
+          borderBottomLeftRadius: 28,
+          borderBottomRightRadius: 28,
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
         <View>
-          <Text style={{ fontSize: 24, fontWeight: "600", color: "#111827" }}>
-            Profile
-          </Text>
-          <Text style={{ fontSize: 13, color: "#6B7280", marginTop: 2 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+            <User size={26} color="#FFFFFF" />
+            <Text style={{ fontSize: 26, fontWeight: "700", color: "#FFFFFF" }}>
+              Profile
+            </Text>
+          </View>
+          <Text style={{ fontSize: 13, color: "#BFDBFE", marginTop: 4 }}>
             Manage your pets and account
           </Text>
         </View>
         <TouchableOpacity
           onPress={() => setShowSettings(true)}
-          style={{ padding: 8 }}
+          style={{
+            backgroundColor: "rgba(255,255,255,0.2)",
+            padding: 10,
+            borderRadius: 12,
+          }}
         >
-          <Settings size={22} color="#6B7280" />
+          <Settings size={22} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
 
@@ -176,13 +185,24 @@ export default function Profile() {
                   key={pet.id}
                   style={{
                     backgroundColor: "#FFFFFF",
-                    borderRadius: 12,
-                    borderWidth: 1,
-                    borderColor: "#E5E7EB",
+                    borderRadius: 16,
+                    borderLeftWidth: 4,
+                    borderLeftColor: "#2563EB",
+                    borderTopWidth: 1,
+                    borderRightWidth: 1,
+                    borderBottomWidth: 1,
+                    borderTopColor: "#DBEAFE",
+                    borderRightColor: "#DBEAFE",
+                    borderBottomColor: "#DBEAFE",
                     padding: 16,
                     marginBottom: 16,
                     flexDirection: "row",
                     alignItems: "center",
+                    shadowColor: "#2563EB",
+                    shadowOpacity: 0.08,
+                    shadowRadius: 6,
+                    shadowOffset: { width: 0, height: 2 },
+                    elevation: 2,
                   }}
                 >
                   <Image
@@ -265,10 +285,10 @@ export default function Profile() {
               <TouchableOpacity
                 onPress={() => setIsAddingPet(true)}
                 style={{
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#EEF4FF",
                   borderRadius: 12,
-                  borderWidth: 1,
-                  borderColor: "#E5E7EB",
+                  borderWidth: 1.5,
+                  borderColor: "#BFDBFE",
                   borderStyle: "dashed",
                   padding: 24,
                   alignItems: "center",

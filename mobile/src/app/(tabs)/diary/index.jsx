@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useQuery } from "@tanstack/react-query";
-import { Plus, Calendar, Smile } from "lucide-react-native";
+import { Plus, Calendar, Book } from "lucide-react-native";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 
@@ -44,15 +44,17 @@ export default function DiaryList() {
 
   return (
     <View
-      style={{ flex: 1, backgroundColor: "#FFFFFF", paddingTop: insets.top }}
+      style={{ flex: 1, backgroundColor: "#F4F7FF", paddingTop: insets.top }}
     >
       {/* Header */}
       <View
         style={{
           paddingHorizontal: 24,
-          paddingVertical: 20,
-          borderBottomWidth: 1,
-          borderBottomColor: "#E5E7EB",
+          paddingTop: 24,
+          paddingBottom: 28,
+          backgroundColor: "#2563EB",
+          borderBottomLeftRadius: 28,
+          borderBottomRightRadius: 28,
         }}
       >
         <View
@@ -62,14 +64,17 @@ export default function DiaryList() {
             alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: 24, fontWeight: "600", color: "#111827" }}>
-            Pet Diary
-          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+            <Book size={26} color="#FFFFFF" />
+            <Text style={{ fontSize: 26, fontWeight: "700", color: "#FFFFFF" }}>
+              Pet Diary
+            </Text>
+          </View>
           <TouchableOpacity
             onPress={handleNewEntry}
             style={{
-              backgroundColor: "#2563EB",
-              paddingHorizontal: 16,
+              backgroundColor: "rgba(255,255,255,0.25)",
+              paddingHorizontal: 14,
               paddingVertical: 8,
               borderRadius: 999,
               flexDirection: "row",
@@ -80,7 +85,7 @@ export default function DiaryList() {
             <Text
               style={{
                 fontSize: 13,
-                fontWeight: "500",
+                fontWeight: "600",
                 color: "#FFFFFF",
                 marginLeft: 4,
               }}
@@ -89,7 +94,7 @@ export default function DiaryList() {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 14, color: "#6B7280", marginTop: 4 }}>
+        <Text style={{ fontSize: 14, color: "#BFDBFE", marginTop: 6 }}>
           Document the journey with your companions.
         </Text>
       </View>
@@ -111,11 +116,22 @@ export default function DiaryList() {
                 onPress={() => router.push(`/(tabs)/diary/${entry.id}`)}
                 style={{
                   backgroundColor: "#FFFFFF",
-                  borderRadius: 12,
-                  borderWidth: 1,
-                  borderColor: "#E5E7EB",
+                  borderRadius: 16,
+                  borderLeftWidth: 4,
+                  borderLeftColor: "#2563EB",
+                  borderTopWidth: 1,
+                  borderRightWidth: 1,
+                  borderBottomWidth: 1,
+                  borderTopColor: "#DBEAFE",
+                  borderRightColor: "#DBEAFE",
+                  borderBottomColor: "#DBEAFE",
                   padding: 16,
                   marginBottom: 16,
+                  shadowColor: "#2563EB",
+                  shadowOpacity: 0.08,
+                  shadowRadius: 6,
+                  shadowOffset: { width: 0, height: 2 },
+                  elevation: 2,
                 }}
               >
                 <View

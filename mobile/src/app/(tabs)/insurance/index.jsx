@@ -41,28 +41,26 @@ export default function InsuranceDashboard() {
 
   return (
     <View
-      style={{ flex: 1, backgroundColor: "#FFFFFF", paddingTop: insets.top }}
+      style={{ flex: 1, backgroundColor: "#F4F7FF", paddingTop: insets.top }}
     >
       {/* Header */}
       <View
         style={{
           paddingHorizontal: 24,
-          paddingVertical: 20,
-          borderBottomWidth: 1,
-          borderBottomColor: "#E5E7EB",
+          paddingTop: 24,
+          paddingBottom: 28,
+          backgroundColor: "#2563EB",
+          borderBottomLeftRadius: 28,
+          borderBottomRightRadius: 28,
         }}
       >
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: "600",
-            color: "#111827",
-            trackingTight: -0.5,
-          }}
-        >
-          Pet Insurance
-        </Text>
-        <Text style={{ fontSize: 14, color: "#6B7280", marginTop: 4 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <Shield size={26} color="#FFFFFF" />
+          <Text style={{ fontSize: 26, fontWeight: "700", color: "#FFFFFF" }}>
+            Pet Insurance
+          </Text>
+        </View>
+        <Text style={{ fontSize: 14, color: "#BFDBFE", marginTop: 6 }}>
           Comprehensive protection for your loved ones.
         </Text>
       </View>
@@ -82,20 +80,20 @@ export default function InsuranceDashboard() {
               marginBottom: 16,
             }}
           >
-            <Text style={{ fontSize: 18, fontWeight: "600", color: "#111827" }}>
+            <Text style={{ fontSize: 17, fontWeight: "600", color: "#111827" }}>
               Active Policies
             </Text>
             <TouchableOpacity
               onPress={handleBuyPolicy}
               style={{
-                backgroundColor: "#EFF6FF",
-                paddingHorizontal: 12,
+                backgroundColor: "#2563EB",
+                paddingHorizontal: 14,
                 paddingVertical: 6,
                 borderRadius: 999,
               }}
             >
               <Text
-                style={{ fontSize: 13, fontWeight: "500", color: "#2563EB" }}
+                style={{ fontSize: 13, fontWeight: "600", color: "#FFFFFF" }}
               >
                 Buy Policy
               </Text>
@@ -115,11 +113,22 @@ export default function InsuranceDashboard() {
                   onPress={() => router.push(`/(tabs)/insurance/${policy.id}`)}
                   style={{
                     backgroundColor: "#FFFFFF",
-                    borderRadius: 12,
-                    borderWidth: 1,
-                    borderColor: "#E5E7EB",
+                    borderRadius: 16,
+                    borderLeftWidth: 4,
+                    borderLeftColor: "#2563EB",
+                    borderTopWidth: 1,
+                    borderRightWidth: 1,
+                    borderBottomWidth: 1,
+                    borderTopColor: "#DBEAFE",
+                    borderRightColor: "#DBEAFE",
+                    borderBottomColor: "#DBEAFE",
                     padding: 16,
                     marginBottom: 16,
+                    shadowColor: "#2563EB",
+                    shadowOpacity: 0.08,
+                    shadowRadius: 6,
+                    shadowOffset: { width: 0, height: 2 },
+                    elevation: 2,
                   }}
                 >
                   <View
